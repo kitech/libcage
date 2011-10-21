@@ -157,7 +157,7 @@ namespace libcage {
                 bool            m_is_callback;
                 callback        m_callback;
 
-#ifdef DEBUG
+#ifdef LIBCAGE_DEBUG
         public:
                 static void     test_peers();
 #endif // DEBUG

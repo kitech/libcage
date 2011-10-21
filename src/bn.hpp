@@ -37,7 +37,11 @@
 
 #include <stdio.h>
 
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <arpa/inet.h>
+#endif
 
 #include <exception>
 #include <iostream>

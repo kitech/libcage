@@ -375,7 +375,7 @@ namespace libcage {
         }
 
 
-#ifdef DEBUG
+#ifdef LIBCAGE_DEBUG
         void
         peers::test_peers()
         {

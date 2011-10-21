@@ -43,7 +43,12 @@
 #include <boost/random.hpp>
 #include <boost/variant.hpp>
 
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <netinet/in.h>
+#endif
+
 
 namespace libcage {
         class peers;

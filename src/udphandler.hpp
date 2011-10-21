@@ -88,8 +88,10 @@ namespace libcage {
                 udphandler();
                 virtual ~udphandler();
 
-        private:
+        public:
                 callback       *m_callback;
+        private:
+                // callback       *m_callback;
                 event           m_event;
                 SOCKET          m_socket;
                 bool            m_opened;

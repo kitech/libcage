@@ -29,6 +29,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef _WIN32
+#include "gettimeofday.h"
+#endif
+
 #include "timer.hpp"
 
 #include <iostream>

@@ -40,6 +40,8 @@
 #ifndef WIN32
 #include <netdb.h>
 #include <unistd.h>
+#else
+#define snprintf _snprintf_s
 #endif
 
 #include <iterator>
@@ -80,7 +82,7 @@ namespace libcage {
 
                 pbuf->use_whole();
 
-                len = recvfrom(fd, pbuf->get_data(), pbuf->get_len(), 0,
+                len = recvfrom(fd, (char*)pbuf->get_data(), pbuf->get_len(), 0,
                                (sockaddr*)&from, &fromlen);
 
                 pbuf->set_len(len);
@@ -182,7 +184,7 @@ namespace libcage {
                 int l = len;
 #endif // WIN32
 
-                sendlen = ::sendto(m_socket, msg, l, 0, to, slen);
+                sendlen = ::sendto(m_socket, (char*)msg, l, 0, to, slen);
 
 #ifndef WIN32
                 if (sendlen < 0) {
@@ -211,11 +213,11 @@ namespace libcage {
 #endif // WIN32
 
                 if (m_domain == PF_INET) {
-                        sendlen = ::sendto(m_socket, msg, l, 0,
+                        sendlen = ::sendto(m_socket, (char*)msg, l, 0,
                                            (sockaddr*)&saddr,
                                            sizeof(sockaddr_in));
                 } else if (m_domain == PF_INET6) {
-                        sendlen = ::sendto(m_socket, msg, l, 0,
+                        sendlen = ::sendto(m_socket, (char*)msg, l, 0,
                                            (sockaddr*)&saddr,
                                            sizeof(sockaddr_in6));
                 }
@@ -314,7 +316,7 @@ namespace libcage {
                 int             optval;
                 optval = 1;
                 setsockopt(m_socket, SOL_SOCKET, SO_REUSEADDR,
-                           &optval, sizeof (optval));
+                           (const char*)&optval, sizeof (optval));
 
 
                 m_opened = true;
